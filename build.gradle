@@ -1,0 +1,27 @@
+plugins {
+	id "java"
+	id "org.springframework.boot" apply false
+	id "com.gorylenko.gradle-git-properties" apply false
+}
+
+group = "com.harishkannarao.springboot"
+version = ""
+java.sourceCompatibility = JavaVersion.toVersion("$javaVersion")
+java.targetCompatibility = JavaVersion.toVersion("$javaVersion")
+
+allprojects {
+	apply plugin: "java"
+
+	repositories {
+		mavenCentral()
+	}
+
+	test {
+		useJUnitPlatform()
+
+		systemProperties = System.properties.stringPropertyNames().collectEntries {
+			[(it): System.getProperty(it)]
+		}
+	}
+}
+
